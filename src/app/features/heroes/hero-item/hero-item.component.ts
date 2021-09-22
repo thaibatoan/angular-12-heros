@@ -10,7 +10,7 @@ export class HeroItemComponent {
   @Input() hero!: Hero;
   @Output() deleteHero = new EventEmitter<Hero>();
 
-  delete(hero: Hero): void {
-    this.deleteHero.emit(hero);
+  delete(): void {
+    this.deleteHero.emit(this.hero);
   }
 }
