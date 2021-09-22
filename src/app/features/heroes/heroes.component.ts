@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Hero } from '../../core/models/hero.model';
 import { HeroService } from '../../core/services/hero.service';
 
@@ -7,21 +9,24 @@ import { HeroService } from '../../core/services/hero.service';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css'],
 })
-export class HeroesComponent implements OnInit {
+export class HeroesComponent implements OnInit, OnDestroy {
   heroes!: Hero[];
   heroName: string = '';
 
+  private readonly _destroy$ = new Subject<void>();
+
   constructor(private heroService: HeroService) {}
 
-  ngOnInit() {
-    this.getHeroes();
-  }
-
-  getHeroes(): void {
+  ngOnInit(): void {
     this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 
-  clearHeroInput() {
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  clearHeroInput(): void {
     this.heroName = '';
   }
 
@@ -30,15 +35,20 @@ export class HeroesComponent implements OnInit {
     if (!this.heroName) {
       return;
     }
-    this.heroService.addHero({ name: this.heroName }).subscribe((hero) => {
-      this.heroes.push(hero);
-      this.clearHeroInput();
-    });
+    this.heroService
+      .addHero({ name: this.heroName })
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((hero) => {
+        this.heroes.push(hero);
+        this.clearHeroInput();
+      });
   }
 
   delete(hero: Hero): void {
-    this.heroes = this.heroes.filter((h) => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.heroService
+      .deleteHero(hero)
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(() => (this.heroes = this.heroes.filter((h) => h !== hero)));
   }
 }
 
