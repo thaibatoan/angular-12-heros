@@ -10,7 +10,7 @@ import { HeroService } from '../../core/services/hero.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit, OnDestroy {
-  heroes!: Hero[];
+  heroes: Hero[] = [];
   heroName: string = '';
 
   private readonly _destroy$ = new Subject<void>();
@@ -18,7 +18,10 @@ export class HeroesComponent implements OnInit, OnDestroy {
   constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
-    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
+    this.heroService
+      .getHeroes()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((heroes) => (this.heroes = heroes));
   }
 
   ngOnDestroy(): void {
