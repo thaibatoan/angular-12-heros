@@ -57,7 +57,7 @@ export class HeroService {
   //////// Save methods //////////
 
   /** POST: add a new hero to the server */
-  addHero(hero: {name: string}): Observable<Hero> {
+  addHero(hero: Omit<Hero, 'id'>): Observable<Hero> {
     return this.http
       .post<Hero>(this.heroesUrl, hero, httpOptions)
       .pipe(catchError(this.handleError<Hero>('addHero')));
