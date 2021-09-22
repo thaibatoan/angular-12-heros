@@ -9,6 +9,7 @@ import { HeroService } from '../../core/services/hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes!: Hero[];
+  heroName?: string;
 
   constructor(private heroService: HeroService) {}
 
@@ -20,14 +21,19 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) {
+  clearHeroInput() {
+    this.heroName = '';
+  }
+
+  addHero(): void {
+    this.heroName = this.heroName?.trim();
+    if (!this.heroName) {
       return;
     }
-    this.heroService.addHero({ name } as Hero).subscribe((hero) => {
+    this.heroService.addHero({ name: this.heroName }).subscribe((hero) => {
       this.heroes.push(hero);
     });
+    this.clearHeroInput();
   }
 
   delete(hero: Hero): void {
