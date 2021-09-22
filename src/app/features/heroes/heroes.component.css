@@ -19,7 +19,11 @@ ul {
   background-color: #cfd8dc;
 }
 
-
+blockquote {
+  margin: 20px 0px;
+  padding: 1em;
+  border-left: 5px solid sienna;
+}
 
 /*
 Copyright 2017-2018 Google Inc. All Rights Reserved.

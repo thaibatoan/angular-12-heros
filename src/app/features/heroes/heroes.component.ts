@@ -9,7 +9,7 @@ import { HeroService } from '../../core/services/hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes!: Hero[];
-  heroName?: string;
+  heroName: string = '';
 
   constructor(private heroService: HeroService) {}
 
@@ -26,7 +26,7 @@ export class HeroesComponent implements OnInit {
   }
 
   addHero(): void {
-    this.heroName = this.heroName?.trim();
+    this.heroName = this.heroName.trim();
     if (!this.heroName) {
       return;
     }

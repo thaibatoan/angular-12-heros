@@ -1,19 +1,20 @@
 <h2>My Heroes</h2>
 
-<form id="addHeroForm">
+<div id="add-hero-form">
   <label>
     Hero name:
     <!-- [(ngModel)]="heroName": Two-way binding -->
     <input [(ngModel)]="heroName" />
   </label>
+  <!-- (click)="addHero()": Event binding -->
   <button (click)="clearHeroInput()">clear</button>
   <button (click)="addHero()">add</button>
 
   <blockquote *ngIf="heroName">
     <!-- {{ heroName }}: Interpolation -->
-    A new hero "{{ heroName }}" is joining force
+    A new hero "{{ heroName }}" is about to join force
   </blockquote>
-</form>
+</div>
 
 <ul id="hero-list">
   <!-- [hero]="hero": Property binding -->
