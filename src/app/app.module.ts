@@ -4,16 +4,17 @@ import { FormsModule }    from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+
+import { SharedModule } from './shared/shared.module';
+import { InMemoryDataService } from './core/services/in-memory-data.service';
+
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { HeroesComponent } from './features/heroes/heroes.component';
+import { HeroDetailComponent } from './features/hero-detail/hero-detail.component';
+import { HeroSearchComponent } from './features/dashboard/hero-search/hero-search.component';
 
 import { AppRoutingModule }     from './app-routing.module';
-
 import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './features/dashboard/dashboard.component';
-import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
-import { HeroesComponent }      from './heroes/heroes.component';
-import { HeroSearchComponent }  from './hero-search/hero-search.component';
-import { MessagesComponent }    from './messages/messages.component';
 
 @NgModule({
   imports: [
@@ -27,14 +28,14 @@ import { MessagesComponent }    from './messages/messages.component';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    SharedModule,
   ],
   declarations: [
     AppComponent,
     DashboardComponent,
     HeroesComponent,
     HeroDetailComponent,
-    MessagesComponent,
     HeroSearchComponent
   ],
   bootstrap: [ AppComponent ]
