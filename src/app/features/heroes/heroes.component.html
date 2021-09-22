@@ -3,17 +3,21 @@
 <form id="addHeroForm">
   <label>
     Hero name:
+    <!-- [(ngModel)]="heroName": Two-way binding -->
     <input [(ngModel)]="heroName" />
   </label>
   <button (click)="clearHeroInput()">clear</button>
   <button (click)="addHero()">add</button>
 
   <blockquote *ngIf="heroName">
+    <!-- Interpolation -->
     A new hero "{{ heroName }}" is joining force
   </blockquote>
 </form>
 
 <ul>
+  <!-- [hero]="hero": Property binding -->
+  <!-- (deleteHero)="delete($event)": Event binding -->
   <app-hero-item
     *ngFor="let hero of heroes"
     [hero]="hero"
