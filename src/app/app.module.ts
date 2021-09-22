@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { SharedModule } from './shared/shared.module';
 import { InMemoryDataService } from './core/services/in-memory-data.service';
 
 import { DashboardComponent } from './features/dashboard/dashboard.component';
