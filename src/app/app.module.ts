@@ -14,6 +14,7 @@ import { HeroSearchComponent } from './features/dashboard/hero-search/hero-searc
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeroItemComponent } from './features/heroes/hero-item/hero-item.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AppComponent } from './app.component';
     HeroesComponent,
     HeroDetailComponent,
     HeroSearchComponent,
+    HeroItemComponent,
   ],
   bootstrap: [AppComponent],
 })
