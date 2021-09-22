@@ -1,6 +1,6 @@
 <h2>My Heroes</h2>
 
-<div>
+<form>
   <label>
     Hero name:
     <input [(ngModel)]="heroName" />
@@ -11,7 +11,7 @@
   <blockquote *ngIf="heroName">
     A new hero "{{ heroName }}" is joining force
   </blockquote>
-</div>
+</form>
 
 <ul>
   <app-hero-item
